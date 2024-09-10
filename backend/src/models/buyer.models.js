@@ -1,18 +1,17 @@
 import mongoose from "mongoose";
-import { User } from "./user.models.js";
 
-const FarmerSchema = new mongoose.Schema(
+const BuyerSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
-    farmerId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     location: { type: String, required: true },
+    buyerId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     phone: { type: String, required: true },
     verified: {
       type: Boolean,
-      default: false,
+     default:false
     },
   },
   { timestamps: true }
 );
 
-export const Farmer = mongoose.model("Farmer", FarmerSchema);
+export const Buyer = mongoose.model("Buyer", BuyerSchema);
