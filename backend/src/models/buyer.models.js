@@ -10,6 +10,12 @@ const BuyerSchema = new mongoose.Schema(
       type: Boolean,
      default:false
     },
+    crop:[
+      {
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Crop'
+      }
+    ]
   },
   { timestamps: true }
 );

@@ -11,6 +11,12 @@ const FarmerSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    crops:[
+      {
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Crop'
+      }
+    ]
   },
   { timestamps: true }
 );
