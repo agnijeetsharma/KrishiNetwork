@@ -7,6 +7,7 @@ import { verifyBuyer } from "../controllers/buyer.controller.js";
 import { verifyJWT } from "../middleware/auth.middleware.js";
 import { Router } from "express";
 import { AddCrop,removeCrop,updateCrop } from "../controllers/crop.controller.js";
+import { getAllMessages, removeMessage, sendMessage, updateMessage } from "../controllers/message.controller.js";
 const router=Router()
 
 router.route("/register").post(registerUser)
@@ -16,7 +17,10 @@ router.route("/verify-buyer").post(verifyJWT,verifyBuyer)
 router.route("/addCrop").post(verifyJWT,AddCrop)
 router.route("/updateCrop").post(verifyJWT,updateCrop)
 router.route("/removeCrop").post(verifyJWT,removeCrop)
+router.route("/sendMessage").post(verifyJWT,sendMessage)
+router.route("/updateMessage").post(verifyJWT,updateMessage)
+router.route("/removeMessage").post(verifyJWT,removeMessage)
+router.route("/allMessage").get(verifyJWT,getAllMessages)
 
 export  default router
-
 
