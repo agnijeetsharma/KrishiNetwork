@@ -16,6 +16,12 @@ const MessageSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    like: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Like",
+      },
+    ],
   },
   { timestamps: true }
 );

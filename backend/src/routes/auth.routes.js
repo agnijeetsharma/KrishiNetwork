@@ -8,6 +8,7 @@ import { verifyJWT } from "../middleware/auth.middleware.js";
 import { Router } from "express";
 import { AddCrop,removeCrop,updateCrop } from "../controllers/crop.controller.js";
 import { getAllMessages, removeMessage, sendMessage, updateMessage } from "../controllers/message.controller.js";
+import { AddLike } from "../controllers/likes.controller.js";
 const router=Router()
 
 router.route("/register").post(registerUser)
@@ -21,6 +22,7 @@ router.route("/sendMessage").post(verifyJWT,sendMessage)
 router.route("/updateMessage").post(verifyJWT,updateMessage)
 router.route("/removeMessage").post(verifyJWT,removeMessage)
 router.route("/allMessage").get(verifyJWT,getAllMessages)
+router.route("/like").post(AddLike)
 
 export  default router
 

@@ -14,6 +14,12 @@ const CropSchema = new mongoose.Schema(
       type: String,
       requried: true,
     },
+    like:[
+      {
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Like'
+      }
+    ]
   },
   { timestamps: true }
 );
