@@ -14,6 +14,10 @@ const CropSchema = new mongoose.Schema(
       type: String,
       requried: true,
     },
+    cropImage:{
+      type:String,
+      required:true
+    },
     like:[
       {
         type:mongoose.Schema.Types.ObjectId,

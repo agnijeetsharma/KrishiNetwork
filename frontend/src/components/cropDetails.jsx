@@ -1,20 +1,25 @@
 import { useState } from "react";
-
+import axios from "axios";
 export const CropDetails = () => {
   const [cropName, setCropName] = useState("");
   const [cropPrice, setCropPrice] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
-
-  const handleSubmit = (e) => {
+  const token =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmUxYzFmYjZiNTBmMGY0YjdmMTU0MGYiLCJyb2xlIjoiZmFybWVyIiwiaWF0IjoxNzI2MDc0NDA5LCJleHAiOjE3MjYxNjA4MDl9.4XsYmKkXIlsFX6S5lTt32Ssg3gx7d2nrNs_vDfTC6KE";
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log({
-      cropName,
-      cropPrice,
-      description,
-      image,
-    });
+    const response=await axios.post("http://localhost:3000/api/v1/users/addCrop",{
+      title: cropName,
+      description: description,
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, 
+      },
+    })
+   console.log(response)
   };
 
   const handleImageChange = (e) => {
@@ -48,7 +53,7 @@ export const CropDetails = () => {
             onChange={(e) => setCropPrice(e.target.value)}
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
             placeholder="Enter crop price"
-            required
+           
           />
         </div>
 
@@ -70,7 +75,7 @@ export const CropDetails = () => {
             accept="image/*"
             onChange={handleImageChange}
             className="mt-1 block w-full p-2"
-            required
+           
           />
         </div>
 

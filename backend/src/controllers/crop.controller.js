@@ -6,13 +6,16 @@ import { Farmer } from "../models/farmer.models.js";
 import { User } from "../models/user.models.js";
 
 const AddCrop = AsyncHandler(async (req, res) => {
-  const { title, description } = req.body;
-  if (!title || !description) throw new ApiError(400, "All fileds requrued");
+  const { title, description,cropImage} = req.body;
+  console.log(cropImage)
+  if (!title || !description||!cropImage) throw new ApiError(400, "All fileds requrued");
   const farmerId = req.user.verifiedFarmer;
   const farmer = await Farmer.findById(farmerId);
   if (!farmer) {
     throw new ApiError(400, "somthing went wrong when fatching farmer");
   }
+  const cropImagePath=req.cropImage.files[0]
+  const imagePath=await  uploadOnCloudinary(cropImagePath);
   const crop = await Crop.create({
     title: title,
     description: description,

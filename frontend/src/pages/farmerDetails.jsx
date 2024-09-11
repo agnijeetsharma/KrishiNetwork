@@ -5,7 +5,7 @@ export const FarmerDetails = () => {
 
   return (
 
-    <div className="flex h-screen">
+    <div className="flex h-screen ">
 
       <div className="shadow-xl w-1/5">
         <FarmerDetailCard />
@@ -20,9 +20,5 @@ export const FarmerDetails = () => {
     </div>
   );
 
-  function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-  }
+  
 }

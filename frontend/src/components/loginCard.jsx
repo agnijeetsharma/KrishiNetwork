@@ -20,6 +20,7 @@ const StyledCard = styled(Card)({
 });
 
 const LoginCard = () => {
+  const navigate=useNavigate()
   const emailRef = useRef();
   const passwordRef = useRef();
 
@@ -29,12 +30,13 @@ const LoginCard = () => {
     const password = passwordRef.current.value;
 
     try {
-      const response = await axios.post("http://localhost:4000/api/signin", {
+      const response = await axios.post("http://localhost:3000/api/v1/users/login", {
         email,
         password,
       });
 
-      console.log("response: " + JSON.stringify(response));
+      console.log(response);
+      navigate("/farmerProfile")
     } catch (error) {
       console.error("Error during login:", error);
     }
