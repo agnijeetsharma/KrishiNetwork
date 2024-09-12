@@ -10,6 +10,7 @@ import { FarmerDetails } from "./pages/farmerDetails"
 import FarmerProfile from "./pages/FarmerProfile"
 import { BuyerDetails } from "./pages/BuyerDetails"
 import BuyerProfile from "./pages/BuyerProfile"
+import { CropContainer } from "./pages/cropContainer"
 
 function App() {
 
@@ -30,6 +31,8 @@ function App() {
           <Route path="/farmerProfile" element={<FarmerProfile/>} />
           <Route path="/buyer-details" element={<BuyerDetails/>} />
           <Route path="/buyerProfile" element={<BuyerProfile/>} />
+          <Route path="/crops" element={<CropContainer/>} />
+          
         </Routes>
       </BrowserRouter>
 
