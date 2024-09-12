@@ -4,22 +4,27 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { Farmer } from "../models/farmer.models.js";
 import { User } from "../models/user.models.js";
+import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
 const AddCrop = AsyncHandler(async (req, res) => {
-  const { title, description,cropImage} = req.body;
-  console.log(cropImage)
-  if (!title || !description||!cropImage) throw new ApiError(400, "All fileds requrued");
+  const { title, description} = req.body;
+ console.log(title,description)
+  if (!title || !description) throw new ApiError(400, "All fileds requried");
   const farmerId = req.user.verifiedFarmer;
   const farmer = await Farmer.findById(farmerId);
   if (!farmer) {
     throw new ApiError(400, "somthing went wrong when fatching farmer");
   }
-  const cropImagePath=req.cropImage.files[0]
-  const imagePath=await  uploadOnCloudinary(cropImagePath);
+  const cropImagePath=req.files?.cropImage[0]?.path
+  console.log(cropImagePath)
+  if(!cropImagePath)throw new ApiResponse(400,"Crop image not found")
+  const imagePath=await uploadOnCloudinary(cropImagePath);
+console.log(imagePath)
   const crop = await Crop.create({
     title: title,
     description: description,
     farmerId: farmerId,
+    cropImage:imagePath.url
   });
   await crop.save();
   farmer.crops.push(crop._id);
@@ -97,4 +102,13 @@ const removeCrop = AsyncHandler(async (req, res) => {
     .json(new ApiResponse(200, updateFarmer, "Crop removed successfully"));
 });
 
-export { AddCrop, updateCrop, removeCrop };
+
+const getAllCrops=AsyncHandler(async(req,res)=>{
+         const allCrops=await Crop.find({});
+         if(!allCrops)throw new ApiError(400,"something went wrong when fetching crops from db")
+        //  console.log(allCrops);
+        // return res.json(a)
+         return res.status(200).json(new ApiResponse(200,allCrops,"All crops fetched successfully"))
+})
+
+export { AddCrop, updateCrop, removeCrop,getAllCrops };

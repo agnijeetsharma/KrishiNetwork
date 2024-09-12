@@ -7,6 +7,7 @@ import { verifyJWT } from "../middleware/auth.middleware.js";
 import { Router } from "express";
 import {
   AddCrop,
+  getAllCrops,
   removeCrop,
   updateCrop,
 } from "../controllers/crop.controller.js";
@@ -41,5 +42,6 @@ router.route("/updateMessage").post(verifyJWT, updateMessage);
 router.route("/removeMessage").post(verifyJWT, removeMessage);
 router.route("/allMessage").get(verifyJWT, getAllMessages);
 router.route("/like").post(AddLike);
+router.route("/allCrops").get(getAllCrops)
 
 export default router;
