@@ -1,14 +1,16 @@
 import { useState } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 export const CropDetails = () => {
+  const selector=useSelector(store=>store.user)
   const [cropName, setCropName] = useState("");
   const [cropPrice, setCropPrice] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
 
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmUxYzFmYjZiNTBmMGY0YjdmMTU0MGYiLCJyb2xlIjoiZmFybWVyIiwiaWF0IjoxNzI2MDc0NDA5LCJleHAiOjE3MjYxNjA4MDl9.4XsYmKkXIlsFX6S5lTt32Ssg3gx7d2nrNs_vDfTC6KE";
+  const token =selector.accessToken;
+  console.log(token)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,6 +30,7 @@ export const CropDetails = () => {
         },
       }
     );
+    alert("Crop Added Successfully!")
     console.log(response);
   };
 

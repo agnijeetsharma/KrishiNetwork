@@ -1,5 +1,5 @@
 import { registerUser, loginUser } from "../controllers/user.controller.js";
-import { VerifyFarmer } from "../controllers/farmer.controller.js";
+import { getFarmerCrops, VerifyFarmer } from "../controllers/farmer.controller.js";
 import { verifyBuyer } from "../controllers/buyer.controller.js";
 // import { ver } from "jsonwebtoken";
 // import express from 'express'
@@ -43,5 +43,6 @@ router.route("/removeMessage").post(verifyJWT, removeMessage);
 router.route("/allMessage").get(verifyJWT, getAllMessages);
 router.route("/like").post(AddLike);
 router.route("/allCrops").get(getAllCrops)
+router.route("/farmerCrops").get(verifyJWT,getFarmerCrops)
 
 export default router;

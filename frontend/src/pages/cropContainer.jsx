@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { CropCard } from "../components/crop.Card";
-
+import { SearchBar } from "../components/searchBar";
 const CropContainer = () => {
   const [crops, setCrops] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -26,8 +26,9 @@ const CropContainer = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
-      <div className="flex flex-wrap gap-4 justify-between">
+    <div className="max-w-7xl mx-auto px-4 py-8 ">
+    <SearchBar/>
+      <div className="flex flex-wrap gap-4 justify-between mt-20">
         {crops.map((crop) => (
           <CropCard key={crop.title} crop={crop} />
         ))}

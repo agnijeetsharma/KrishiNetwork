@@ -3,7 +3,8 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { AsyncHandler } from "../utils/asyncHandler.js";
 import { Farmer } from "../models/farmer.models.js";
-export const VerifyFarmer = AsyncHandler(async (req, res, next) => {
+import { Crop } from "../models/crop.models.js";
+ const VerifyFarmer = AsyncHandler(async (req, res, next) => {
   
   const userId = req.userId; 
   
@@ -51,3 +52,17 @@ export const VerifyFarmer = AsyncHandler(async (req, res, next) => {
     .status(200)
     .json(new ApiResponse(200, newFarmer, "Farmer details confirmed"));
 });
+
+
+const getFarmerCrops=AsyncHandler(async(req,res)=>{
+          const farmer=req.user;
+          console.log(farmer);
+          // const Crops = await Crop.find({ _id: { $in: farmer.crops} });
+          // console.log(farmer. verifiedFarmer)
+          const Crops=await Crop.find({farmerId:farmer.verifiedFarmer});
+          console.log(Crops)
+          if(!Crops)throw new ApiError(400,"crops not found")
+            return res.status(200).json(new ApiResponse(200,Crops,"All crops fetched successfully"));
+})
+
+export {VerifyFarmer,getFarmerCrops}

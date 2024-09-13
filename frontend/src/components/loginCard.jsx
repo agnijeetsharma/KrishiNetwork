@@ -8,6 +8,8 @@ import Box from '@mui/material/Box';
 import { styled } from '@mui/system';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../utils/userSlice';
 
 const StyledCard = styled(Card)({
   maxWidth: 400,
@@ -21,6 +23,7 @@ const StyledCard = styled(Card)({
 
 const LoginCard = () => {
   const navigate=useNavigate()
+  const dispatch=useDispatch()
   const emailRef = useRef();
   const passwordRef = useRef();
 
@@ -36,7 +39,8 @@ const LoginCard = () => {
       });
 
       console.log(response);
-      navigate("/farmerProfile")
+      dispatch(loginUser(response?.data?.data));
+      navigate("/farmer-details")
     } catch (error) {
       console.error("Error during login:", error);
     }

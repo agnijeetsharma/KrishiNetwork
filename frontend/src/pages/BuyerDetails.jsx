@@ -1,5 +1,3 @@
-import { CropDetails } from "../components/cropDetails";
-// import { FarmerDetailCard } from "../components/farmerDetailsCard";
 import { BuyerDetailCard } from "../components/BuyerDetailsCard";
 import CreateListing from "./CreateListing";
 

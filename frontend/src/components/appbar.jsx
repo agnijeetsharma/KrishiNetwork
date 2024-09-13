@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 export const AppBar = () => {
+   const selector=useSelector(store=>store.user)
   const scrollToSection = (id) => {
     const section = document.getElementById(id);
     if (section) {
@@ -40,7 +42,6 @@ export const AppBar = () => {
     >
       <div>
         <ul className="flex gap-10">
-          <li className='hover:text-green-700 cursor-pointer'>HOME</li>
           <li className='hover:text-green-700 cursor-pointer' onClick={() => scrollToSection("service-section")} >SERVICES</li>
           <li className='hover:text-green-700 cursor-pointer' onClick={() => scrollToSection("about-section")}>ABOUT US</li>
           <li className='hover:text-green-700 cursor-pointer' onClick={() => scrollToSection("why-us-section")}>WHY US</li>
@@ -54,13 +55,13 @@ export const AppBar = () => {
           <li className='hover:text-green-700 cursor-pointer' onClick={() => scrollToSection("gallery-section")}>GALLERY</li>
           <li className='hover:text-green-700 cursor-pointer' onClick={() => scrollToSection("testimonials-section")}>TESTIMONIALS</li>
           <li className='hover:text-green-700 cursor-pointer' onClick={() => scrollToSection("contact-section")}>CONTACT US</li>
-          <div>
+          {!selector.user&&<div>
             <ul className='flex'>
           <li className='hover:text-green-700 cursor-pointer'><Link to="/login">LOGIN|</Link></li>
-          <li className='hover:text-green-700 cursor-pointer'><Link to="/signup">SIGN UP</Link></li>
+        <li className='hover:text-green-700 cursor-pointer'><Link to="/signup">SIGN UP</Link></li>
 
             </ul>
-          </div>
+          </div>}
         </ul>
       </div>
      
