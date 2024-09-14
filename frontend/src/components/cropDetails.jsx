@@ -39,7 +39,7 @@ export const CropDetails = () => {
   };
 
   return (
-    <div className="w-1/2 mx-auto mt-10 p-8 border border-green-500 rounded-lg">
+    <div className="w-1/2 mx-auto mt-10 p-8 border border-green-500 rounded-lg z-50">
       <h1 className="text-2xl font-bold text-green-700 text-center mb-6">
         Add Crop and Its Details
       </h1>

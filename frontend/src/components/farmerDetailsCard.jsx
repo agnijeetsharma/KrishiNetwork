@@ -8,7 +8,7 @@ export const FarmerDetailCard = () => {
   const selector = useSelector((store) => store.user.farmer);
 
   return (
-    <div className="flex ml-20 gap-10 max-h-screen items-start w-1/4 mt-20">
+    <div className="flex ml-20 gap-10 h-fit items-start w-1/4 mt-20">
       <div className="flex flex-col gap-8">
         <div className="flex flex-col gap-2 items-center text-sm">
           <div className="border border-green-500 w-24 h-24 rounded-full flex items-center justify-center">

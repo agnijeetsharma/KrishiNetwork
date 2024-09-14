@@ -92,7 +92,7 @@ const removeCrop = AsyncHandler(async (req, res) => {
     { new: true }
   );
 
-  await Crop.findByIdAndUpdate(cropId);
+  await Crop.findByIdAndDelete(cropId);
 
   if (!updateFarmer) {
     throw new ApiError(

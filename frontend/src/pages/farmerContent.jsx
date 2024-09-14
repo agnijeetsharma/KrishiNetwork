@@ -61,20 +61,42 @@ export const FarmerContent = () => {
     <div className="mt-20 h-screen">
       <div className="flex h-screen flex-col gap-5 overflow-y-scroll">
         {cropData.map((crop) => (
-          <div key={crop._id} className="bg-gray-100 p-5 shadow-lg rounded-lg mb-4 ove">
+          <div
+            key={crop._id}
+            className="bg-gray-100 flex justify-between  p-5 shadow-lg rounded-lg mb-4 ove"
+          >
             <div className="flex flex-col items-center">
               <img
                 src={crop.cropImage}
                 alt={crop.title}
                 className="w-64 h-64 object-cover rounded-lg mb-4"
               />
-              <h1 className="text-3xl font-bold text-green-700 mb-2">{crop.title}</h1>
-              <p className="text-lg text-gray-600 mb-2"><strong>Description:</strong> {crop.description}</p>
-              <p className="text-lg text-gray-600 mb-2"><strong>Farmer ID:</strong> {crop.farmerId}</p>
-              <p className="text-lg text-gray-600 mb-2"><strong>Likes:</strong> {crop.like}</p>
-              <p className="text-sm text-gray-500 mb-4"><strong>Created At:</strong> {new Date(crop.createdAt).toLocaleDateString()}</p>
-              <p className="text-sm text-gray-500 mb-4"><strong>Updated At:</strong> {new Date(crop.updatedAt).toLocaleDateString()}</p>
-              <div className="flex gap-4">
+            </div>
+            <div className="flex flex-col justify-center text-center mr-16">
+            <div className="">
+
+              <h1 className="text-3xl font-bold text-green-700 mb-2">
+                {crop.title}
+              </h1>
+              <p className="text-lg text-gray-600 mb-2">
+                <strong>Description:</strong> {crop.description}
+              </p>
+              <p className="text-lg text-gray-600 mb-2">
+                <strong>Farmer ID:</strong> {crop.farmerId}
+              </p>
+              <p className="text-lg text-gray-600 mb-2">
+                <strong>Likes:</strong> {crop.like.length}
+              </p>
+              <p className="text-sm text-gray-500 mb-4">
+                <strong>Created At:</strong>{" "}
+                {new Date(crop.createdAt).toLocaleDateString()}
+              </p>
+              <p className="text-sm text-gray-500 mb-4">
+                <strong>Updated At:</strong>{" "}
+                {new Date(crop.updatedAt).toLocaleDateString()}
+              </p>
+            </div>
+              <div className="flex gap-4 justify-center">
                 <button
                   onClick={() => handleUpdate(crop._id)}
                   className="flex items-center gap-2 bg-green-500 text-white py-2 px-4 rounded-lg shadow hover:bg-yellow-400 transition"
