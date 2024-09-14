@@ -1,13 +1,97 @@
-import { Content } from "../components/content"
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { FaTrash, FaEdit } from "react-icons/fa";
 
-export const FarmerContent=()=>{
+import { useSelector } from "react-redux";
 
-    
-    return (
-        <div>
-            <div className="h-screen overflow-y-scroll">
-               <Content/>
+export const FarmerContent = () => {
+  const [cropData, setCropData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const selector = useSelector((store) => store.user);
+
+  useEffect(() => {
+    const fetchFarmerCrops = async () => {
+      try {
+        const token = selector.accessToken;
+
+        var response = await fetch(
+          "http://localhost:3000/api/v1/users/farmerCrops",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const data = await response.json();
+        setCropData(data.data || []);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching crops:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchFarmerCrops();
+  }, [selector.accessToken]);
+
+  const handleDelete = async (cropId, farmerId) => {
+    try {
+      await axios.post("http://localhost:3000/api/v1/users/removeCrop", {
+        cropId,
+        farmerId,
+      });
+
+      setCropData((prevData) => prevData.filter((crop) => crop._id !== cropId));
+    } catch (error) {
+      console.error("Error deleting crop:", error);
+    }
+  };
+
+  const handleUpdate = (cropId) => {
+    // Handle update logic here (e.g., open a modal or redirect to an update form)
+    console.log("Update crop:", cropId);
+  };
+
+  if (loading) return <div>Loading...</div>;
+
+  return (
+    <div className="mt-20 h-screen">
+      <div className="flex h-screen flex-col gap-5 overflow-y-scroll">
+        {cropData.map((crop) => (
+          <div key={crop._id} className="bg-gray-100 p-5 shadow-lg rounded-lg mb-4 ove">
+            <div className="flex flex-col items-center">
+              <img
+                src={crop.cropImage}
+                alt={crop.title}
+                className="w-64 h-64 object-cover rounded-lg mb-4"
+              />
+              <h1 className="text-3xl font-bold text-green-700 mb-2">{crop.title}</h1>
+              <p className="text-lg text-gray-600 mb-2"><strong>Description:</strong> {crop.description}</p>
+              <p className="text-lg text-gray-600 mb-2"><strong>Farmer ID:</strong> {crop.farmerId}</p>
+              <p className="text-lg text-gray-600 mb-2"><strong>Likes:</strong> {crop.like}</p>
+              <p className="text-sm text-gray-500 mb-4"><strong>Created At:</strong> {new Date(crop.createdAt).toLocaleDateString()}</p>
+              <p className="text-sm text-gray-500 mb-4"><strong>Updated At:</strong> {new Date(crop.updatedAt).toLocaleDateString()}</p>
+              <div className="flex gap-4">
+                <button
+                  onClick={() => handleUpdate(crop._id)}
+                  className="flex items-center gap-2 bg-green-500 text-white py-2 px-4 rounded-lg shadow hover:bg-yellow-400 transition"
+                >
+                  <FaEdit size={20} /> Update
+                </button>
+                <button
+                  onClick={() => handleDelete(crop._id, crop.farmerId)}
+                  className="flex items-center gap-2 bg-green-600 text-white py-2 px-4 rounded-lg shadow hover:bg-red-500 transition"
+                >
+                  <FaTrash size={20} /> Delete
+                </button>
+              </div>
             </div>
-        </div>
-    )
-}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};

@@ -76,13 +76,16 @@ const updateCrop = AsyncHandler(async (req, res) => {
     .json(new ApiResponse(200, crop, "Crop updated successfully"));
 });
 const removeCrop = AsyncHandler(async (req, res) => {
-  const { cropId } = req.body;
+  const { cropId,farmerId } = req.body
+  console.log(cropId,farmerId)
   if (!cropId) throw new ApiError(400, "id not found");
-  const farmerId = req.user.verifiedFarmer;
+  // const farmerId = req.user.verifiedFarmer;
+  // console.log(cropId,farmerId);
   const farmer = await Farmer.findById(farmerId);
   if (!farmer) {
     throw new ApiError(400, "Farmer not found");
   }
+  // console.log(farmer);
   const updateFarmer = await Farmer.findOneAndUpdate(
     { _id: farmerId, crops: cropId },
     { $pull: { crops: cropId } },

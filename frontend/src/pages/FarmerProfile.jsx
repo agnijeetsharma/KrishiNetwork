@@ -1,9 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { updateUser,logoutUser } from "../utils/userSlice";
 const FarmerProfile = () => {
   const selector=useSelector(store=>store.user)
+  const dispatch=useDispatch();
   const navigate=useNavigate()
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -33,7 +35,9 @@ const FarmerProfile = () => {
         },
       }
     );
-    console.log(response);
+    // console.log(response);
+    dispatch(logoutUser())
+    dispatch(updateUser(response.data.data))
     navigate("/farmer-details")
   };
 

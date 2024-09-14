@@ -6,11 +6,11 @@ import { FarmerContent } from "./farmerContent";
 export const FarmerDetails = () => {
   const selector=useSelector(store=>store.user.farmer)
   // const selector=null;
-  console.log(selector)
+  // console.log(selector)
   // console.log(selector);
   return (
 
-    <div className="flex h-screen ">
+    <div className="flex h-screen mt-20">
 
       <div className="shadow-xl w-1/4">
         <FarmerDetailCard />
@@ -19,8 +19,8 @@ export const FarmerDetails = () => {
 
       <div className=" w-4/5 flex flex-1 justify-center items-center">
         <div className=" w-full text-center items-center">
-         { !selector&&<FarmerContent />}
-        {  selector&&<FarmerProfile/>}
+         { selector&&<FarmerContent />}
+        {  !selector&&<FarmerProfile/>}
         </div>
       </div>
     </div>

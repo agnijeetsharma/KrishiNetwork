@@ -35,7 +35,8 @@ export const SideBar = () => {
         </li>
 }
         <li className="flex flex-col items-center group">
-          <FaSeedling className="text-green-800 text-3xl group-hover:text-green-400 transition duration-300" />
+        <Link to="/crops"> <FaSeedling className="text-green-800 text-3xl group-hover:text-green-400 transition duration-300" /></Link>
+         
           <span className="text-xs text-green mt-2 group-hover:text-green-400">
             Crops
           </span>

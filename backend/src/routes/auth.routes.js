@@ -36,7 +36,7 @@ router.route("/addCrop").post(
   AddCrop
 );
 router.route("/updateCrop").post(verifyJWT, updateCrop);
-router.route("/removeCrop").post(verifyJWT, removeCrop);
+router.route("/removeCrop").post( removeCrop);
 router.route("/sendMessage").post(verifyJWT, sendMessage);
 router.route("/updateMessage").post(verifyJWT, updateMessage);
 router.route("/removeMessage").post(verifyJWT, removeMessage);

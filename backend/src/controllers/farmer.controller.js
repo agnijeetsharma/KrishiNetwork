@@ -22,7 +22,7 @@ import { Crop } from "../models/crop.models.js";
     req.farmerId=farmer._id
     return res
     .status(400)
-    .json(new ApiError(400, farmer,"Farmer details are already verified for this user"));
+    .json(new ApiError(400, {farmer:farmer},"Farmer details are already verified for this user"));
   }
   
   const { location, phone, name } = req.body;
@@ -50,7 +50,7 @@ import { Crop } from "../models/crop.models.js";
 
   return res
     .status(200)
-    .json(new ApiResponse(200, newFarmer, "Farmer details confirmed"));
+    .json(new ApiResponse(200, {farmer:newFarmer}, "Farmer details confirmed"));
 });
 
 
