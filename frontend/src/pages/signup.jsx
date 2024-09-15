@@ -1,5 +1,5 @@
 // src/pages/Signup.js
-import React from 'react';
+// import React from 'react';
 import SignUpCard from '../components/signupCard';
 import Box from '@mui/material/Box';
 

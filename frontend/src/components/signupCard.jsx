@@ -24,7 +24,7 @@ const StyledCard = styled(Card)({
 });
 
 const SignUpCard = () => {
-  const [role, setRole] = useState("buyer");
+  const [role, setRole] = useState("Buyer");
   const navigate = useNavigate(); 
 
   const handleRoleChange = (event) => {
@@ -113,7 +113,7 @@ const SignUpCard = () => {
                 label="Farmer"
               />
               <FormControlLabel
-                value="buyer"
+                value="Buyer"
                 control={<Radio color="success" />}
                 label="Buyer"
               />

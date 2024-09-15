@@ -1,3 +1,4 @@
+import { FaBell } from 'react-icons/fa';
 import { FaHome, FaUser, FaSignOutAlt, FaSeedling } from "react-icons/fa"; // Importing icons
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -41,6 +42,14 @@ export const SideBar = () => {
             Crops
           </span>
         </li>
+        {
+          selector.user&&<li className="flex flex-col items-center group">
+           <FaBell className="text-green-800 text-3xl group-hover:text-green-400 transition duration-300" ></FaBell>
+          <span className="text-xs text-green mt-2 group-hover:text-green-400">
+           Message
+          </span>
+        </li>
+        }
       </ul>
     </div>
   );

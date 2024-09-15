@@ -28,6 +28,7 @@ const verifyBuyer = AsyncHandler(async (req, res, next) => {
     phone,
     user: userId,
     verified: true,
+    crop
   });
 
   if (!newBuyer) {
@@ -41,5 +42,25 @@ const verifyBuyer = AsyncHandler(async (req, res, next) => {
     .status(200)
     .json(new ApiResponse(200, newBuyer, "Buyer verified successfully"));
 });
+const cropAddedByBuyer=AsyncHandler(async(req,res)=>{
+  const {cropId}=req.body;
+  if(!cropId)throw new ApiError(400,"cropId not found")
+  const buyer=req.user;
+if(!buyer)throw new ApiError(400,"buyer not found middleware problem")
+  // console.log(buyer,cropId)
+ buyer.crop.push(cropId);
+await buyer.save();
+return res.status(200).json(new ApiResponse(200,buyer,"Crop added successfully"))
 
-export { verifyBuyer };
+
+
+})
+
+const getAllBuyerCrop=AsyncHandler(async(req,res)=>{
+
+})
+const removeCropAddedByBuyer=AsyncHandler(async(req,res)=>{
+
+})
+
+export { verifyBuyer ,cropAddedByBuyer,getAllBuyerCrop,removeCropAddedByBuyer};

@@ -1,12 +1,12 @@
-import  { useState } from 'react';
+// import  { useState } from 'react';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import wheat from "../assets/wheat.jpeg"
 
 function Completed() {
   // State for dynamic inputs
-  const [quantity, setQuantity] = useState('');
-  const [location, setLocation] = useState('');
+  // const [quantity, setQuantity] = useState('');
+  // const [location, setLocation] = useState('');
 
   // Function to generate PDF
   const downloadPDF = () => {

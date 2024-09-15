@@ -2,18 +2,18 @@ import { FaUser } from "react-icons/fa";
 import { FiMessageSquare } from "react-icons/fi";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { MdVerified } from "react-icons/md";
-import { FaPlus } from "react-icons/fa";
+// import { FaPlus } from "react-icons/fa";
 
 export const BuyerDetailCard = () => {
   return (
-    <div className="flex ml-10 gap-10 max-h-screen  items-start w-1/4 mt-20">
+    <div className="flex ml-20 gap-10 max-h-screen  items-start w-1/4 mt-20">
       <div className="flex flex-col gap-8">
        
         <div className="flex flex-col gap-2 items-center text-sm">
           <div className="border border-green-500 w-24 h-24 rounded-full flex items-center justify-center">
             <FaUser size={40} className="text-green-700" />
           </div>
-          <h2 className="text-lg font-semibold">Buyer's Name</h2>
+          <h2 className="text-lg font-semibold">Buyer Name</h2>
           <h2 className="text-gray-600">Buyer Address</h2>
         </div>
 

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { FarmerDetailCard } from '../components/farmerDetailsCard';
+import  { useState } from 'react';
+// import { DetailCard } from '../components/UserDetailsCard';
 
 const CreateListing = () => {
   const [cropName, setCropName] = useState('');

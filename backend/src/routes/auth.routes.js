@@ -1,6 +1,6 @@
 import { registerUser, loginUser } from "../controllers/user.controller.js";
 import { getFarmerCrops, VerifyFarmer } from "../controllers/farmer.controller.js";
-import { verifyBuyer } from "../controllers/buyer.controller.js";
+import { cropAddedByBuyer, getAllBuyerCrop, verifyBuyer } from "../controllers/buyer.controller.js";
 // import { ver } from "jsonwebtoken";
 // import express from 'express'
 import { verifyJWT } from "../middleware/auth.middleware.js";
@@ -44,5 +44,7 @@ router.route("/allMessage").get(verifyJWT, getAllMessages);
 router.route("/like").post(AddLike);
 router.route("/allCrops").get(getAllCrops)
 router.route("/farmerCrops").get(verifyJWT,getFarmerCrops)
+router.route("/buyerCrops").get(verifyJWT,getAllBuyerCrop)
+router.route("/buyer-addCrops").post(verifyJWT,cropAddedByBuyer)
 
 export default router;

@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser,logoutUser } from "../utils/userSlice";
-const FarmerProfile = () => {
+const Profile = () => {
   const selector=useSelector(store=>store.user)
   const dispatch=useDispatch();
   const navigate=useNavigate()
@@ -102,4 +102,4 @@ const FarmerProfile = () => {
   );
 };
 
-export default FarmerProfile;
+export default Profile;

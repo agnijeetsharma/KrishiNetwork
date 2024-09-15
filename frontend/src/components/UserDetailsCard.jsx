@@ -4,7 +4,7 @@ import { AiOutlineCheckCircle } from "react-icons/ai";
 import { MdVerified } from "react-icons/md";
 import { useSelector } from "react-redux";
 
-export const FarmerDetailCard = () => {
+export const DetailCard = () => {
   const selector = useSelector((store) => store.user.farmer);
 
   return (

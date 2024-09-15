@@ -5,7 +5,7 @@ import Login from "./pages/login";
 import { Provider } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { FarmerDetails } from "./pages/farmerDetails";
-import FarmerProfile from "./pages/FarmerProfile";
+import FarmerProfile from "./pages/Profile";
 import { BuyerDetails } from "./pages/BuyerDetails";
 import { CropContainer } from "./pages/cropContainer";
 import { Store } from "./utils/store";

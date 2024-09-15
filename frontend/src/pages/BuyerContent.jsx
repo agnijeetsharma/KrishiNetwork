@@ -4,18 +4,18 @@ import { FaTrash, FaEdit } from "react-icons/fa";
 
 import { useSelector } from "react-redux";
 
-export const FarmerContent = () => {
+export const BuyerContent = () => {
   const [cropData, setCropData] = useState([]);
   const [loading, setLoading] = useState(true);
   const selector = useSelector((store) => store.user);
 
   useEffect(() => {
-    const fetchFarmerCrops = async () => {
+    const fetchBuyerCrops = async () => {
       try {
         const token = selector.accessToken;
 
         var response = await fetch(
-          "http://localhost:3000/api/v1/users/farmerCrops",
+          "http://localhost:3000/api/v1/users/buyerCrops",
           {
             method: "GET",
             headers: {
@@ -34,8 +34,8 @@ export const FarmerContent = () => {
       }
     };
 
-    fetchFarmerCrops();
-  }, );
+    fetchBuyerCrops();
+  });
 
   const handleDelete = async (cropId, farmerId) => {
     try {
@@ -50,10 +50,10 @@ export const FarmerContent = () => {
     }
   };
 
-  const handleUpdate = (cropId) => {
+//   const handleUpdate = (cropId) => {
     // Handle update logic here (e.g., open a modal or redirect to an update form)
-    console.log("Update crop:", cropId);
-  };
+//     console.log("Update crop:", cropId);
+//   };
 
   if (loading) return <div>Loading...</div>;
 
@@ -97,12 +97,12 @@ export const FarmerContent = () => {
               </p>
             </div>
               <div className="flex gap-4 justify-center">
-                <button
+                {/* <button
                   onClick={() => handleUpdate(crop._id)}
                   className="flex items-center gap-2 bg-green-500 text-white py-2 px-4 rounded-lg shadow hover:bg-yellow-400 transition"
                 >
                   <FaEdit size={20} /> Update
-                </button>
+                </button> */}
                 <button
                   onClick={() => handleDelete(crop._id, crop.farmerId)}
                   className="flex items-center gap-2 bg-green-600 text-white py-2 px-4 rounded-lg shadow hover:bg-red-500 transition"

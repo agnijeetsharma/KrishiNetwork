@@ -1,7 +1,7 @@
 import { CropDetails } from "../components/cropDetails";
-import { FarmerDetailCard } from "../components/farmerDetailsCard";
+import { DetailCard } from "../components/UserDetailsCard";
 import { useSelector } from 'react-redux'
-import FarmerProfile from "./FarmerProfile"
+import Profile from "./Profile"
 import { FarmerContent } from "./farmerContent";
 import { useState } from "react";
 
@@ -20,7 +20,7 @@ export const FarmerDetails = () => {
     <div className="flex h-screen mt-20">
 
       <div className="shadow-xl w-1/4">
-        <FarmerDetailCard />
+        <DetailCard />
       </div>
 
 
@@ -35,7 +35,7 @@ export const FarmerDetails = () => {
         </div>}
       {  add&&<div className="flex "> <CropDetails/></div>}
          { !add&&selector&&<FarmerContent />}
-        {  !add&&!selector&&<FarmerProfile/>}
+        {  !add&&!selector&&<Profile/>}
         </div>
       </div>
     </div>
