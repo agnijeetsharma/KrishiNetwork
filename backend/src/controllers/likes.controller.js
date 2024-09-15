@@ -7,7 +7,7 @@ import { AsyncHandler } from "../utils/asyncHandler.js";
 
 const AddLike = AsyncHandler(async (req, res, next) => {
   const { userId, modelType, modelId } = req.body;
-  console.log(userId, modelType, modelId);
+  // console.log(userId, modelType, modelId);
   if (!userId || !modelType || !modelId)
     throw new ApiError(400, "All field Requried");
   if (modelType === "Message") {
@@ -36,7 +36,7 @@ const AddLike = AsyncHandler(async (req, res, next) => {
     likeable: modelId,
   });
   if (!like) throw new ApiError(400, "Like does not created");
-  console.log(likeable);
+  // console.log(likeable);
   likeable.like.push(like._id);
   await likeable.save();
   return res
