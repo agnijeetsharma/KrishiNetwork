@@ -10,6 +10,7 @@ import { BuyerDetails } from "./pages/BuyerDetails";
 import { CropContainer } from "./pages/cropContainer";
 import { Store } from "./utils/store";
 import Parent from "./pages/parent";
+import CropProfile from "./pages/CropProfile";
 
 const appRouter = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const appRouter = createBrowserRouter([
         path: "/crops",
         element: <CropContainer />,
       },
+      {
+        path: "/crops-details",
+        element: <CropProfile/> 
+      }
     ],
   },
 ]);

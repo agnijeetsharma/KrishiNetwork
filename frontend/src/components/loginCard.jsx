@@ -8,8 +8,9 @@ import Box from '@mui/material/Box';
 import { styled } from '@mui/system';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../utils/userSlice';
+import Login from '../pages/login';
 
 const StyledCard = styled(Card)({
   maxWidth: 400,
@@ -22,6 +23,8 @@ const StyledCard = styled(Card)({
 });
 
 const LoginCard = () => {
+  const selector=useSelector(store=>store.user);
+  console.log(selector)
   const navigate=useNavigate()
   const dispatch=useDispatch()
   const emailRef = useRef();
@@ -39,8 +42,24 @@ const LoginCard = () => {
       });
 
       console.log(response);
-      dispatch(loginUser(response?.data?.data));
-      navigate("/farmer-details")
+       dispatch(loginUser(response?.data?.data));
+    //  const time=  setTimeout(()=>{
+      if(selector?.user?.role==='farmer'||selector?.farmer){
+        navigate("/farmer-details")
+
+      }
+      else{
+        navigate("/buyer-details")
+      }
+      // clearTimeout(time)
+      //  },2000)
+      // if(selector.user.role==='farmer'||selector.farmer){
+      //   navigate("/farmer-details")
+
+      // }
+      // else{
+      //   navigate("/buyer-details")
+      // }
     } catch (error) {
       console.error("Error during login:", error);
     }

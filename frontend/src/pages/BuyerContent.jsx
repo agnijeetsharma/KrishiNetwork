@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { FaTrash, FaEdit } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa";
 
 import { useSelector } from "react-redux";
 
@@ -37,11 +37,10 @@ export const BuyerContent = () => {
     fetchBuyerCrops();
   });
 
-  const handleDelete = async (cropId, farmerId) => {
+  const handleDelete = async (cropId) => {
     try {
-      await axios.post("http://localhost:3000/api/v1/users/removeCrop", {
-        cropId,
-        farmerId,
+      await axios.post("http://localhost:3000/api/v1/users/buyer-removeCrops", {
+        cropId
       });
 
       setCropData((prevData) => prevData.filter((crop) => crop._id !== cropId));
@@ -104,7 +103,7 @@ export const BuyerContent = () => {
                   <FaEdit size={20} /> Update
                 </button> */}
                 <button
-                  onClick={() => handleDelete(crop._id, crop.farmerId)}
+                  onClick={() => handleDelete(crop._id)}
                   className="flex items-center gap-2 bg-green-600 text-white py-2 px-4 rounded-lg shadow hover:bg-red-500 transition"
                 >
                   <FaTrash size={20} /> Delete
