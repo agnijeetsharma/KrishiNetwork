@@ -20,7 +20,7 @@ const verifyBuyer = AsyncHandler(async (req, res, next) => {
 
   let buyer = await Buyer.findOne({ user: userId });
   if (buyer) {
-    return res.status(200).json(new ApiResponse(200, buyer, "Buyer already verified"));
+    return res.status(200).json(new ApiResponse(200,{user:user,buyer: buyer}, "Buyer already verified"));
   }
 
   const newBuyer = await Buyer.create({
@@ -42,7 +42,7 @@ const verifyBuyer = AsyncHandler(async (req, res, next) => {
 
   return res
     .status(200)
-    .json(new ApiResponse(200, newBuyer, "Buyer verified successfully"));
+    .json(new ApiResponse(200, {user:user,Buyer:newBuyer}, "Buyer verified successfully"));
 });
 const cropAddedByBuyer=AsyncHandler(async(req,res)=>{
   const {cropId}=req.body;

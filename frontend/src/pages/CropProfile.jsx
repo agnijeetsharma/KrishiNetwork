@@ -5,11 +5,12 @@ import { useSelector } from "react-redux";
 
 const CropProfile = () => {
     const token=useSelector(store=>store.user.accessToken)
+    // const token=user.ac
     // console.log(token);
     const [message ,setmessage]=useState(false)
     const [content,setContent]=useState("");
     const selector=useSelector(store=>store.crop);
-    const {description,title,cropImage,like,updatedAt,createdAt,farmerId}=selector.crop
+    const {description,title,cropImage,like,updatedAt,createdAt,farmerId,_id}=selector.crop
     // console.log(selector.crop);
     const handleMessageClick=async(e)=>{
         e.preventDefault();
@@ -32,8 +33,21 @@ const CropProfile = () => {
        
 
     }
+    const handleCropAddClick=async(e)=>{
+          e.preventDefault();
+          const response=await axios.post("http://localhost:3000/api/v1/users/buyer-addCrops",{
+                cropId:_id
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`, 
+            },
+          })
+        console.log(response);
+    }
   return (
-    <div className="crop-profile-container p-8 bg-white shadow-md rounded-lg ml-60 mr-60 mt-28">
+    <div className="crop-profile-container p-8 bg-white shadow-md rounded-lg ml-60 mr-60 mt-16">
   <div className=" ">
  
       <div className="crop-details mb-8">
@@ -53,7 +67,16 @@ const CropProfile = () => {
         <p className="text-lg text-gray-600">Location: {}</p>
         <p className="text-lg text-gray-600">Phone: {}</p>
       </div>
+      <div className="flex justify-around mb-5">
 
+      <div className="text-center">
+        <button
+          className="bg-green-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-600 transition-colors duration-300"
+          onClick={(e) => handleCropAddClick(e)}
+        >
+          ADD CROP
+        </button>
+      </div>
       <div className="text-center">
         <button
           className="bg-green-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-600 transition-colors duration-300"
@@ -61,6 +84,7 @@ const CropProfile = () => {
         >
           Message Farmer
         </button>
+      </div>
       </div>
      { message&&<div className="text-center">
            <div className="">

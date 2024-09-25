@@ -6,6 +6,7 @@ import {BuyerContent} from "./BuyerContent"
 // import BuyerProfile from "./buyerDetails"
 export const BuyerDetails = () => {
   const selector=useSelector(store=>store.user)
+  console.log("hi")
   return (
     <div className="flex h-screen">
      
@@ -16,8 +17,8 @@ export const BuyerDetails = () => {
 
       <div className=" w-4/5 flex flex-1 justify-center items-center">
         <div className=" w-full text-center items-center">
-      {  selector.user&&<BuyerContent/>}
-       {  !selector.user&&<BuyerProfile/>}
+      {  selector?.Buyer&&selector.user&&<BuyerContent/>}
+       {  !selector?.Buyer&&<BuyerProfile/>}
         </div>
       </div>
     </div>

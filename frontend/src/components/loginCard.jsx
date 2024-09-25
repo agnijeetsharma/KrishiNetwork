@@ -43,23 +43,16 @@ const LoginCard = () => {
 
       console.log(response);
        dispatch(loginUser(response?.data?.data));
-    //  const time=  setTimeout(()=>{
-      if(selector?.user?.role==='farmer'||selector?.farmer){
+    
+      // console.log(response?.data?.data)
+      if(response?.data?.data?.user?.role=='farmer'){
         navigate("/farmer-details")
 
       }
       else{
         navigate("/buyer-details")
       }
-      // clearTimeout(time)
-      //  },2000)
-      // if(selector.user.role==='farmer'||selector.farmer){
-      //   navigate("/farmer-details")
 
-      // }
-      // else{
-      //   navigate("/buyer-details")
-      // }
     } catch (error) {
       console.error("Error during login:", error);
     }

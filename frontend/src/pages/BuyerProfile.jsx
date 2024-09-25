@@ -45,7 +45,7 @@ export const BuyerProfile = () => {
     <div className="min-h-screen flex items-center justify-center p-10">
       <div className="bg-white shadow-lg rounded-lg p-8 max-w-lg w-full">
         <h1 className="text-3xl font-bold text-center text-gray-700 mb-8">
-    {  selector.user?'Buyer Farmer': 'Buyer Profile'}
+    {  selector.Buyer?'Update Buyer Profile': 'Complete Buyer Profile'}
         </h1>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
