@@ -29,7 +29,8 @@ const verifyBuyer = AsyncHandler(async (req, res, next) => {
     phone,
     user: userId,
     verified: true,
-    crop:[]
+    crop:[],
+    connections:[]
   });
   await newBuyer.save()
 
@@ -84,5 +85,7 @@ const removeCropAddedByBuyer=AsyncHandler(async(req,res)=>{
     await buyer.save()
     return res.status(200).json(new ApiResponse(200,buyer,"Crop removed successfully"));
 })
+// const makeConnectionRequest=AsyncHandler()=>{
 
+// }
 export { verifyBuyer ,cropAddedByBuyer,getAllBuyerCrop,removeCropAddedByBuyer};

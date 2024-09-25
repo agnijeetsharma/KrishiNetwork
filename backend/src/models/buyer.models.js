@@ -15,6 +15,12 @@ const BuyerSchema = new mongoose.Schema(
         type:mongoose.Schema.Types.ObjectId,
         ref:'Crop'
       }
+    ],
+    connections:[
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'User'
+      }
     ]
   },
   { timestamps: true }
