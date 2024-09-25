@@ -11,6 +11,7 @@ import { CropContainer } from "./pages/cropContainer";
 import { Store } from "./utils/store";
 import Parent from "./pages/parent";
 import CropProfile from "./pages/CropProfile";
+import Followers from "./pages/Followers";
 
 const appRouter = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/crops-details",
         element: <CropProfile/> 
+      },
+      {
+        path: "/connections",
+        element: <Followers/> 
       }
     ],
   },
