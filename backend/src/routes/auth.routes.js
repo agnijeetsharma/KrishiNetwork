@@ -19,6 +19,7 @@ import {
 } from "../controllers/message.controller.js";
 import { AddLike } from "../controllers/likes.controller.js";
 import { upload } from "../middleware/muter.middleware.js";
+import { acceptConnection, getAllUnacceptedRequest, makeConnection, unfollowConnection } from "../controllers/connection.controller.js";
 const router = Router();
 
 router.route("/register").post(registerUser);
@@ -48,7 +49,10 @@ router.route("/buyerCrops").get(verifyJWT,getAllBuyerCrop)
 router.route("/buyer-addCrops").post(verifyJWT,cropAddedByBuyer)
 router.route("/buyer-removeCrops").post(verifyJWT,removeCropAddedByBuyer)
 router.route("/farmerOneCrop").get(getParticularFarmerCrop)
-
+router.route("/make-connection").post(makeConnection)
+router.route("/accept-request").post(acceptConnection)
+router.route("/unfollow-connection").post(unfollowConnection)
+router.route("/unaccepted-request").post(getAllUnacceptedRequest)
 
 
 export default router;
