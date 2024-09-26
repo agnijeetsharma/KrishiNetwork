@@ -9,7 +9,7 @@ export const CropCard= (data) => {
   const navigate=useNavigate();
   const dispatch=useDispatch();
   const selector=useSelector(store=>store.user.user)
-  console.log("user",selector)
+  // console.log("user",selector)
   // console.log(data)
   const { cropImage,_id, like, description, createdAt, updatedAt, title }=data.crop
  const handleLikes=async()=>{

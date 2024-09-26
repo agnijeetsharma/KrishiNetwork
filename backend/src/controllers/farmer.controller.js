@@ -71,5 +71,12 @@ const getParticularFarmerCrop=AsyncHandler(async(req,res)=>{
   if(!farmer)throw new ApiError(400,"farmer not found")
     return res.status(200).json(new ApiResponse(200,farmer,"farmer fetched successfully"));
 })
-
-export {VerifyFarmer,getFarmerCrops,getParticularFarmerCrop}
+const getFarmer=AsyncHandler(async(req,res)=>{
+  const {farmerId}=req.body
+  // console.log(farmerId)
+  if(!farmerId)throw new ApiError(400,"farmer id not found");
+  const farmer=await Farmer.findById(farmerId);
+  if(!farmer)throw new ApiError(400,"farmer not found or id is not correct")
+    res.status(200).json(new ApiResponse(200,farmer,"farmer found successfully"));
+})
+export {VerifyFarmer,getFarmerCrops,getParticularFarmerCrop,getFarmer}

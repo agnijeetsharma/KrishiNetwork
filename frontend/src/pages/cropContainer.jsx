@@ -19,7 +19,7 @@ const CropContainer = () => {
     };
 
     fetchCrops();
-  }, ); 
+  },); 
 
   if (loading) {
     return <div>Loading...</div>;

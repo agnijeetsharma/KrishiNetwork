@@ -32,10 +32,10 @@ export const SideBar = () => {
         </li>
 
         <li className="flex flex-col items-center group" onClick={()=>handleProfile()}>
-          {/* <Link to="/farmer-details"> */}
+         
             {" "}
             <FaUser className="text-green-800 text-3xl group-hover:text-green-400 transition duration-300" />
-          {/* </Link> */}
+        
           <span className="text-xs text-green mt-2 group-hover:text-green-400">
             Profile
           </span>
@@ -57,7 +57,10 @@ export const SideBar = () => {
         </li>
         {
           selector.user&&<li className="flex flex-col items-center group">
+          <Link to="/connections">
+
            <FaBell className="text-green-800 text-3xl group-hover:text-green-400 transition duration-300" ></FaBell>
+          </Link>
           <span className="text-xs text-green mt-2 group-hover:text-green-400">
            Message
           </span>

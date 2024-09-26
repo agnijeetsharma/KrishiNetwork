@@ -5,10 +5,11 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { Connections } from "../models/connection.models.js";
 
 const makeConnection = AsyncHandler(async (req, res) => {
-  const { receiver, sender } = req.body;
-  if (!receiver || !sender)
-    throw new ApiError(400, "something went wrong,Id requried");
-
+  const { receiver } = req.body;
+  if (!receiver) throw new ApiError(400, "something went wrong,Id requried");
+  const sender = req?.userId;
+const request=await Connections.find({receiver:receiver,sender:sender})
+if(request)throw new ApiError(400,"request exist before or already have a connection")
   const connection = new Connections({
     receiver: receiver,
     sender: sender,
@@ -23,12 +24,14 @@ const makeConnection = AsyncHandler(async (req, res) => {
     .json(new ApiResponse(200, connection, "request sended successfully"));
 });
 const acceptConnection = AsyncHandler(async (req, res) => {
-  const { receiver, sender } = req.body;
-  if (!receiver || !sender) throw new ApiError(400, "something went wrong,Id");
+  const { sender } = req.body;
+  if ( !sender) throw new ApiError(400, "something went wrong,Id");
+  const receiver=req.userId;
   const connection = await Connections.findOne({
     receiver: receiver,
     sender: sender,
   });
+  // const requset
   if (!connection) throw new ApiError(400, "Invalid request");
   if (connection.status === "accepted")
     throw new ApiError(400, "connection already accepted");
@@ -62,11 +65,13 @@ const getAllAcceptedConnections = AsyncHandler(async (req, res) => {
   res.status(200).json(new ApiResponse(200, connections, "all connections"));
 });
 const getAllPendingRequest = AsyncHandler(async (req, res) => {
-  const { receiver, sender } = req.body;
-  if ((!receiver, !sender)) throw new ApiError(400, "valid id requried");
-  const request = await Connections.find({ sender: sender, status: "pending" })
+ const receiver = req.userId;
+  if ((!receiver)) throw new ApiError(400, "valid id requried");
+  const request = await Connections.find({ receiver:receiver, status: "pending" })
     .populate("receiver sender")
     .exec();
+    if(!request)throw new ApiError(400,"request are not found")
+      res.status(200).json(new ApiResponse(200,request,"All pending request fetched successfully"))
 });
 const getAllUnacceptedRequest = AsyncHandler(async (req, res) => {
   const { receiver, sender } = req.body;
@@ -74,9 +79,9 @@ const getAllUnacceptedRequest = AsyncHandler(async (req, res) => {
   const request = await Connections.find({
     receiver: receiver,
     status: "pending",
-  })
-    // .populate("receiver sender")  //pouplate will join the user and with  the id and will find the whole document associated with this id
-    // .exec();           //handle promises well
+  });
+  // .populate("receiver sender")  //pouplate will join the user and with  the id and will find the whole document associated with this id
+  // .exec();           //handle promises well
   if (!request) throw new ApiError(400, "request not found");
   res.status(200).json(new ApiResponse(200, request, "all unaccepted request"));
 });
@@ -86,5 +91,5 @@ export {
   getAllAcceptedConnections,
   getAllPendingRequest,
   getAllUnacceptedRequest,
-  unfollowConnection
+  unfollowConnection,
 };
