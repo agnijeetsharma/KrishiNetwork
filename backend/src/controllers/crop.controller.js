@@ -7,24 +7,24 @@ import { User } from "../models/user.models.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
 const AddCrop = AsyncHandler(async (req, res) => {
-  const { title, description} = req.body;
- console.log(title,description)
+  const { title, description } = req.body;
+
   if (!title || !description) throw new ApiError(400, "All fileds requried");
   const farmerId = req.user.verifiedFarmer;
   const farmer = await Farmer.findById(farmerId);
   if (!farmer) {
     throw new ApiError(400, "somthing went wrong when fatching farmer");
   }
-  const cropImagePath=req.files?.cropImage[0]?.path
-  console.log(cropImagePath)
-  if(!cropImagePath)throw new ApiResponse(400,"Crop image not found")
-  const imagePath=await uploadOnCloudinary(cropImagePath);
-console.log(imagePath)
+  const cropImagePath = req.files?.cropImage[0]?.path;
+
+  if (!cropImagePath) throw new ApiResponse(400, "Crop image not found");
+  const imagePath = await uploadOnCloudinary(cropImagePath);
+
   const crop = await Crop.create({
     title: title,
     description: description,
     farmerId: farmerId,
-    cropImage:imagePath.url
+    cropImage: imagePath.url,
   });
   await crop.save();
   farmer.crops.push(crop._id);
@@ -50,7 +50,7 @@ const updateCrop = AsyncHandler(async (req, res) => {
   }
 
   const farmerId = req.user.verifiedFarmer;
-  console.log(farmerId);
+
   if (!farmerId) {
     throw new ApiError(400, "Something went wrong when fetching the farmer.");
   }
@@ -76,16 +76,15 @@ const updateCrop = AsyncHandler(async (req, res) => {
     .json(new ApiResponse(200, crop, "Crop updated successfully"));
 });
 const removeCrop = AsyncHandler(async (req, res) => {
-  const { cropId,farmerId } = req.body
-  console.log(cropId,farmerId)
+  const { cropId, farmerId } = req.body;
+
   if (!cropId) throw new ApiError(400, "id not found");
-  // const farmerId = req.user.verifiedFarmer;
-  // console.log(cropId,farmerId);
+
   const farmer = await Farmer.findById(farmerId);
   if (!farmer) {
     throw new ApiError(400, "Farmer not found");
   }
-  // console.log(farmer);
+
   const updateFarmer = await Farmer.findOneAndUpdate(
     { _id: farmerId, crops: cropId },
     { $pull: { crops: cropId } },
@@ -105,14 +104,14 @@ const removeCrop = AsyncHandler(async (req, res) => {
     .json(new ApiResponse(200, updateFarmer, "Crop removed successfully"));
 });
 
+const getAllCrops = AsyncHandler(async (req, res) => {
+  const allCrops = await Crop.find({});
+  if (!allCrops)
+    throw new ApiError(400, "something went wrong when fetching crops from db");
 
-const getAllCrops=AsyncHandler(async(req,res)=>{
-         const allCrops=await Crop.find({});
-         if(!allCrops)throw new ApiError(400,"something went wrong when fetching crops from db")
-        //  console.log(allCrops);
-        // return res.json(a)
-         return res.status(200).json(new ApiResponse(200,allCrops,"All crops fetched successfully"))
-})
+  return res
+    .status(200)
+    .json(new ApiResponse(200, allCrops, "All crops fetched successfully"));
+});
 
-
-export { AddCrop, updateCrop, removeCrop,getAllCrops };
+export { AddCrop, updateCrop, removeCrop, getAllCrops };

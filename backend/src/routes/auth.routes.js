@@ -19,7 +19,7 @@ import {
 } from "../controllers/message.controller.js";
 import { AddLike } from "../controllers/likes.controller.js";
 import { upload } from "../middleware/muter.middleware.js";
-import { acceptConnection, getAllPendingRequest, getAllUnacceptedRequest, makeConnection, unfollowConnection } from "../controllers/connection.controller.js";
+import { acceptConnection, getAllAcceptedConnections, getAllPendingRequest, getAllUnacceptedRequest, makeConnection, unfollowConnection } from "../controllers/connection.controller.js";
 const router = Router();
 
 router.route("/register").post(registerUser);
@@ -55,6 +55,7 @@ router.route("/unfollow-connection").post(unfollowConnection)
 router.route("/unaccepted-request").post(getAllUnacceptedRequest)
 router.route("/pending-requests").get(verifyJWT,getAllPendingRequest)
 router.route("/get-farmer").post(getFarmer);
+router.route("/all-connections").get(verifyJWT,getAllAcceptedConnections)
 
 
 export default router;

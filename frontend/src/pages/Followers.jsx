@@ -1,55 +1,56 @@
 import { useEffect } from "react";
 import axios from "axios";
 import {useSelector} from "react-redux"
+import { Link } from "react-router-dom";
 
 const Followers = () => {
   const token=useSelector(store=>store.user.accessToken)
   // console.log(token)
-  useEffect(() => {
-    const fetchPendingConnection = async () => {
-      try {
-        const response = await axios.post(
-          "http://localhost:3000/api/v1/users/accept-request",{
-            // sender:,
-          },
-          {
-            Headers:{
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`, 
-            }
-          }
-        );
-        console.log(response);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchPendingConnection();
-  }, []);
+  // useEffect(() => {
+  //   const fetchPendingConnection = async () => {
+  //     try {
+  //       const response = await axios.post(
+  //         "http://localhost:3000/api/v1/users/accept-request",{
+  //           // sender:,
+  //         },
+  //         {
+  //           Headers:{
+  //             "Content-Type": "application/json",
+  //             Authorization: `Bearer ${token}`, 
+  //           }
+  //         }
+  //       );
+  //       console.log(response);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   fetchPendingConnection();
+  // }, []);
 
 
 
-  useEffect(() => {
-    const fetchConnection = async () => {
-      try {
-        const response = await axios.post(
-          "http://localhost:3000/api/v1/users/accept-request",{
-            // sender:,
-          },
-          {
-            Headers:{
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`, 
-            }
-          }
-        );
-        console.log(response);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchConnection();
-  }, []);
+  // useEffect(() => {
+  //   const fetchConnection = async () => {
+  //     try {
+  //       const response = await axios.post(
+  //         "http://localhost:3000/api/v1/users/accept-request",{
+  //           // sender:,
+  //         },
+  //         {
+  //           Headers:{
+  //             "Content-Type": "application/json",
+  //             Authorization: `Bearer ${token}`, 
+  //           }
+  //         }
+  //       );
+  //       console.log(response);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   fetchConnection();
+  // }, []);
 
 
   return (
@@ -60,7 +61,10 @@ const Followers = () => {
           <h2 className="text-xl font-semibold mb-4">Manage my network</h2>
           <ul className="space-y-7">
             <li className="flex justify-between items-center">
+            <Link to="/connections/message">
+
               <span>Connections</span>
+            </Link>
               <span className="font-bold">559</span>
             </li>
             <li className="flex justify-between items-center">

@@ -1,5 +1,4 @@
 import HomePage from "./pages/homepage";
-
 import Signup from "./pages/signup";
 import Login from "./pages/login";
 import { Provider } from "react-redux";
@@ -12,6 +11,8 @@ import { Store } from "./utils/store";
 import Parent from "./pages/parent";
 import CropProfile from "./pages/CropProfile";
 import Followers from "./pages/Followers";
+import { Message } from "./pages/Message";
+import { ConnectioLayout } from "./pages/connectionLayout";
 
 const appRouter = createBrowserRouter([
   {
@@ -19,7 +20,7 @@ const appRouter = createBrowserRouter([
     element: <Parent />,
     children: [
       {
-        path: "/",
+        index: true, // This will make '/' point to HomePage by default
         element: <HomePage />,
       },
       {
@@ -31,29 +32,39 @@ const appRouter = createBrowserRouter([
         element: <Signup />,
       },
       {
-        path: "/farmer-details",
+        path: "farmer-details",
         element: <FarmerDetails />,
       },
       {
-        path: "/farmerProfile",
+        path: "farmerProfile",
         element: <FarmerProfile />,
       },
       {
-        path: "/buyer-details",
+        path: "buyer-details",
         element: <BuyerDetails />,
       },
       {
-        path: "/crops",
+        path: "crops",
         element: <CropContainer />,
       },
       {
-        path: "/crops-details",
-        element: <CropProfile/> 
+        path: "crops-details",
+        element: <CropProfile />,
+      },
+    ],
+  },
+  {
+    path: "/connections",
+    element: <ConnectioLayout />,
+    children: [
+      {
+        path: "message",  
+        element: <Message />,
       },
       {
-        path: "/connections",
-        element: <Followers/> 
-      }
+        path: "", 
+        element: <Followers />,
+      },
     ],
   },
 ]);

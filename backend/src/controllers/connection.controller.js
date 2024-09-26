@@ -56,12 +56,17 @@ const unfollowConnection = AsyncHandler(async (req, res) => {
     .json(new ApiResponse(200, connection, "connection unfollowed"));
 });
 const getAllAcceptedConnections = AsyncHandler(async (req, res) => {
-  const { receiver, sender } = req.body;
-  if ((!receiver, !sender)) throw new ApiError(400, "valid id requried");
-  const connections = await connections
-    .find()
-    .populate("receiver sender")
-    .exec();
+  const receiver=req.userId
+  if ((!receiver)) throw new ApiError(400, "valid id requried");
+ 
+  const connections = await Connections.find({
+    $or: [{ receiver: receiver }, { sender: receiver }],
+    status: "accepted"
+  })
+  .populate("receiver sender")
+  .exec();
+  
+    if(!connections)res.status(200).json(new ApiResponse(200,"no connection for this user"))
   res.status(200).json(new ApiResponse(200, connections, "all connections"));
 });
 const getAllPendingRequest = AsyncHandler(async (req, res) => {
