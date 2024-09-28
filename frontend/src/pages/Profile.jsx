@@ -35,7 +35,7 @@ const Profile = () => {
         },
       }
     );
-    // console.log(response);
+    console.log(response);
     dispatch(logoutUser())
     dispatch(updateUser(response.data.data))
     navigate("/farmer-details")

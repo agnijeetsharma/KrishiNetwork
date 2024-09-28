@@ -20,6 +20,7 @@ import {
 import { AddLike } from "../controllers/likes.controller.js";
 import { upload } from "../middleware/muter.middleware.js";
 import { acceptConnection, getAllAcceptedConnections, getAllPendingRequest, getAllUnacceptedRequest, makeConnection, unfollowConnection } from "../controllers/connection.controller.js";
+import { getAllChatsMessages } from "../controllers/chat.controller.js";
 const router = Router();
 
 router.route("/register").post(registerUser);
@@ -50,12 +51,13 @@ router.route("/buyer-addCrops").post(verifyJWT,cropAddedByBuyer)
 router.route("/buyer-removeCrops").post(verifyJWT,removeCropAddedByBuyer)
 router.route("/farmerOneCrop").get(getParticularFarmerCrop)
 router.route("/make-connection").post(verifyJWT,makeConnection)
-router.route("/accept-request").post(verifyJWT,acceptConnection)
+router.route("/accept-request").post(acceptConnection)
 router.route("/unfollow-connection").post(unfollowConnection)
 router.route("/unaccepted-request").post(getAllUnacceptedRequest)
-router.route("/pending-requests").get(verifyJWT,getAllPendingRequest)
+router.route("/pending-requests").post(getAllPendingRequest)
 router.route("/get-farmer").post(getFarmer);
 router.route("/all-connections").get(verifyJWT,getAllAcceptedConnections)
+router.route("/get-chatMessages").post(verifyJWT,getAllChatsMessages)
 
 
 export default router;

@@ -18,13 +18,13 @@ const userId=user.user._id
           {
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
+             'Authorization': `Bearer ${token}`,
             },
           }
         );
        
         const connections = response?.data?.data || [];
-        
+        console.log(response)
         const filteredConnections = connections.map((item) => {
             if (item?.receiver?._id === userId) {
                 return item?.sender; 
@@ -44,7 +44,7 @@ const userId=user.user._id
 fetchConnection();
 }, []);
 if (loding) return <div>Loding.......</div>;
-// console.log(validConnections)
+
  
   return (
     <div>

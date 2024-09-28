@@ -2,7 +2,8 @@ import express from "express";
 import authRouter  from "./routes/auth.routes.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import bodyParser from "body-parser";
+import bodyParser from "body-parser"
+// import { server } from "./socket/index.js";
 const app = express();
 app.use(express.json());
 app.use(cookieParser());

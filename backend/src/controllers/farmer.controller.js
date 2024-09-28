@@ -52,7 +52,7 @@ const VerifyFarmer = AsyncHandler(async (req, res, next) => {
   return res
     .status(200)
     .json(
-      new ApiResponse(200, { farmer: newFarmer }, "Farmer details confirmed")
+      new ApiResponse(200, { farmer: newFarmer,user:user }, "Farmer details confirmed")
     );
 });
 
@@ -60,7 +60,7 @@ const getFarmerCrops = AsyncHandler(async (req, res) => {
   const farmer = req.user;
 
   const Crops = await Crop.find({ farmerId: farmer.verifiedFarmer });
-  console.log(Crops);
+  // console.log(Crops);
   if (!Crops) throw new ApiError(400, "crops not found");
   return res
     .status(200)
